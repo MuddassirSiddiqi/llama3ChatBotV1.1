@@ -1,24 +1,100 @@
-# nanoVoltz's ChatBot
+# Llama3 ChatBot V1.1
 
-This is an interactive chatbot built using `langchain_ollama` and `llama3` model for handling conversations in a natural way. The chatbot can process user input, maintain conversation history, and provide helpful responses.
+Welcome to the Llama3 ChatBot V1.1 repository! This chatbot is built using **LangChain** and **Ollama**, leveraging the powerful **Llama3** model to provide conversational AI capabilities. Below, you'll find instructions on how to set up and run the chatbot on your local machine.
 
-## Features
+---
 
-- **Improved Conversation Template**: The chatbot responds clearly and concisely to the user's question while taking into account the conversation history.
-- **Context Summarization**: If the conversation history exceeds a certain word threshold (500 words), the context is summarized to improve efficiency and avoid overloading the model.
-- **Input Validation**: The chatbot checks for empty inputs and prompts the user to provide valid input.
-- **Error Handling**: If any error occurs during the execution, the chatbot gracefully handles it and provides an error message.
+## Repository Link
+[https://github.com/MuddassirSiddiqi/llama3ChatBotV1.1](https://github.com/MuddassirSiddiqi/llama3ChatBotV1.1)
 
-## Code Explanation
+---
 
-### Conversation Flow
+## Prerequisites
 
-1. **Template Setup**: The conversation template is defined with placeholders for the context (previous conversation history) and the current question from the user.
-2. **Model and Prompt Initialization**: The `OllamaLLM` model (with "llama3") is initialized along with a prompt that is created from the defined template.
-3. **Context Summarization**: The `summarize_context` function checks if the conversation history exceeds a threshold (500 words). If so, it triggers the `summarize_text` function to reduce the length of the context, which helps in maintaining the efficiency of the conversation.
-4. **Main Loop**: The bot prompts the user for input, processes the input, and displays the response while maintaining and updating the conversation history.
+Before running the chatbot, ensure you have the following installed:
 
-### Code
+1. **Python 3.8 or higher**: The code is written in Python, so you'll need Python installed on your system.
+2. **Ollama**: The chatbot uses the Ollama framework to interact with the Llama3 model. Make sure Ollama is installed and running on your machine. You can find installation instructions [here](https://ollama.ai/).
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+Clone this repository to your local machine using the following command:
+```bash
+git clone https://github.com/MuddassirSiddiqi/llama3ChatBotV1.1.git
+cd llama3ChatBotV1.1
+```
+
+### 2. Create a Virtual Environment
+It's recommended to use a virtual environment to manage dependencies. Run the following commands to create and activate a virtual environment:
+
+- **On macOS/Linux:**
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  ```
+
+- **On Windows:**
+  ```bash
+  python -m venv venv
+  venv\Scripts\activate
+  ```
+
+### 3. Install Dependencies
+Install the required Python packages using `pip`:
+```bash
+pip install langchain-ollama langchain-core
+```
+
+---
+
+## Running the ChatBot
+
+Once the setup is complete, you can run the chatbot by executing the following command:
+```bash
+python chatbot.py
+```
+
+### How It Works
+1. The chatbot will greet you with a welcome message.
+2. Type your question or input, and the chatbot will respond.
+3. To exit the chatbot, type `exit`.
+
+---
+
+## Code Overview
+
+The chatbot is built using the following components:
+
+### 1. **OllamaLLM**
+   - This is the wrapper for the **Llama3** model, which is used to generate responses to user inputs.
+
+### 2. **ChatPromptTemplate**
+   - Defines the structure of the conversation. It includes a template that provides context and a placeholder for the user's question.
+
+### 3. **Conversation History**
+   - The chatbot maintains a history of the conversation to provide context for future responses. If the conversation becomes too long, it is summarized to avoid exceeding token limits.
+
+### Key Functions
+
+#### `summarize_context(context)`
+   - This function checks if the conversation history exceeds a certain length (e.g., 500 words). If it does, the history is summarized to keep it concise.
+
+#### `handle_conversation()`
+   - This is the main function that handles the conversation loop. It:
+     1. Initializes the conversation history.
+     2. Takes user input.
+     3. Invokes the LangChain pipeline to generate a response.
+     4. Updates the conversation history with the new interaction.
+     5. Summarizes the history if necessary.
+
+---
+
+## Code
+
+Here is the complete code for the chatbot:
 
 ```python
 from langchain_ollama import OllamaLLM
@@ -70,3 +146,31 @@ def handle_conversation():
 
 if __name__ == "__main__":
     handle_conversation()
+```
+
+---
+
+## Dependencies
+The following Python packages are required:
+- `langchain-ollama`: For integrating Ollama with LangChain.
+- `langchain-core`: Core components for building LangChain applications.
+
+---
+
+## Troubleshooting
+- **Ollama Not Running**: Ensure Ollama is installed and running on your machine. You can test it by running `ollama serve` in your terminal.
+- **Dependency Issues**: If you encounter issues with dependencies, try reinstalling them using `pip install -r requirements.txt` (if a `requirements.txt` file is provided).
+
+---
+
+## Contributing
+Feel free to contribute to this project by opening issues or submitting pull requests. Your feedback and improvements are welcome!
+
+---
+
+## License
+This project is open-source and available under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+---
+
+Enjoy chatting with Llama3 ChatBot V1.1! 🚀
